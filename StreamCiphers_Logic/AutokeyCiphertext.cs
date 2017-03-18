@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StreamCiphers_Logic
 {
-    class AutokeyCiphertext
+    public class AutokeyCiphertext
     {
         List<int> seed;
         List<int> f;
@@ -15,6 +15,14 @@ namespace StreamCiphers_Logic
         List<int> y;
 
         byte[] fileBytes;
+
+        public AutokeyCiphertext()
+        {
+            seed = new List<int>();
+            f = new List<int>();
+            x = new List<int>();
+            y = new List<int>();
+        }
 
         public AutokeyCiphertext(string fileName)
         {
@@ -26,23 +34,19 @@ namespace StreamCiphers_Logic
             y = new List<int>();
         }
 
-        public AutokeyCiphertext(string argSeed, string argFunction, string argStream)
+        public void Init(string argSeed, string argFunction, string argStream)
         {
-            seed = new List<int>();
-            f = new List<int>();
-            x = new List<int>();
-
             for (int i = 0; i < argSeed.Count(); i++)
             {
                 seed.Add(int.Parse(argSeed[i].ToString()));
                 y.Add(0);
             }
-            
+
             for (int i = 0; i < 4; i++)
             {
                 f.Add(int.Parse(argFunction[i].ToString()));
             }
-            
+
             for (int i = 0; i < 4; i++)
             {
                 x.Add(int.Parse(argStream[i].ToString()));

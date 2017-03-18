@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StreamCiphers_Logic;
 
 namespace StreamCiphers_Tests
 {
@@ -13,9 +14,9 @@ namespace StreamCiphers_Tests
         [TestMethod]
         public void AutokeyCiphertext_Logic_Initialization()
         {
-            AutokeyCiphertext lfsr = new AutokeyCiphertext();
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
 
-            lfsr.Init("1011", "1101");
+            autokey.Init("1011", "1001", "1100");
             Assert.AreEqual("1011", lfsr.Seed);
             Assert.AreEqual("1101", lfsr.Polynomial);
 
@@ -30,16 +31,27 @@ namespace StreamCiphers_Tests
             Assert.AreEqual(1, bit);
 
         }
+        */
         [TestMethod]
         public void AutokeyCiphertext_Logic_Engine_Works()
         {
-            AutokeyCiphertext lfsr = new AutokeyCiphertext();
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
 
-            lfsr.Init("1011", "11001");
-            string result = lfsr.GetOutput();
+            autokey.Init("1011", "1001", "1100");
+            string result = autokey.GetEcnryptedString();
 
-            Assert.AreEqual("0110", result);
+            Assert.AreEqual("1110", result);
         }
-        */
+
+        [TestMethod]
+        public void AutokeyCiphertext_Logic_Engine_Works_2()
+        {
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
+
+            autokey.Init("0010", "1011", "1111");
+            string result = autokey.GetEcnryptedString();
+
+            Assert.AreEqual("0010", result);
+        }
     }
 }
