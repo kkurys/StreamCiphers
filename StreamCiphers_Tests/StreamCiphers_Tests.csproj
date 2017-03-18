@@ -53,6 +53,12 @@
     <Compile Include="LFSR_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StreamCiphers_Logic\StreamCiphers_Logic.csproj">
+      <Project>{66a5bcb9-c2e9-43f4-abe3-01dfffd97f05}</Project>
+      <Name>StreamCiphers_Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
