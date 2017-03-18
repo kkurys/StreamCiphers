@@ -13,6 +13,8 @@ namespace StreamCiphers_Logic
         public List<int> F { get; set; }
         public List<int> X { get; set; }
         public List<int> Y { get; set; }
+        public List<string> Bytes { get; set; }
+        List<string> output;
 
         byte[] fileBytes;
 
@@ -22,6 +24,8 @@ namespace StreamCiphers_Logic
             F = new List<int>();
             X = new List<int>();
             Y = new List<int>();
+            Bytes = new List<string>();
+            output = new List<string>();
         }
 
         public AutokeyCiphertext(string fileName)
@@ -34,51 +38,58 @@ namespace StreamCiphers_Logic
             Y = new List<int>();
         }
 
-        public void Init(string argSeed, string argFunction, string argStream)
+        public void Init(string argSeed, string argFunction)
         {
             for (int i = 0; i < argSeed.Count(); i++)
             {
                 Seed.Add(int.Parse(argSeed[i].ToString()));
             }
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < argFunction.Count(); i++)
             {
                 F.Add(int.Parse(argFunction[i].ToString()));
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                X.Add(int.Parse(argStream[i].ToString()));
             }
         }
 
         public List<int> Encrypt()
         {
-
-            for (int i = 0; i < Seed.Count(); i++)
+            foreach (string stream in Bytes)
             {
-                Y.Add(0);
-                for (int j = 0; j < F.Count(); j++)
+                X = new List<int>();
+                Y = new List<int>();
+                for (int i = 0; i < stream.Count(); i++)
                 {
-                    if (F[j] == 1)
+                    X.Add(int.Parse(stream[i].ToString()));
+                    Y.Add(0);
+                }
+
+                for (int i = 0; i < X.Count(); i++)
+                {
+                    for (int j = 0; j < F.Count(); j++)
                     {
-                        Y[i] += Seed[j];
+                        if (F[j] == 1)
+                        {
+                            Y[i] += Seed[j];
+                        }
                     }
-                }
 
-                Y[i] = (X[i] + Y[i]) % 2;
+                    Y[i] = (X[i] + Y[i]) % 2;
 
-                for (int j = Seed.Count() - 1; j > 0; j--)
-                {
-                    Seed[j] = Seed[j - 1];
+                    for (int j = Seed.Count() - 1; j > 0; j--)
+                    {
+                        Seed[j] = Seed[j - 1];
+                    }
+                    Seed[0] = Y[i];
                 }
-                Seed[0] = Y[i];
+                output.Add(ByteToString());
             }
+
+            
 
             return Y;
         }
 
-        public string GetEcnryptedString()
+        private string ByteToString()
         {
             string result = "";
 
@@ -90,6 +101,41 @@ namespace StreamCiphers_Logic
             return result;
         }
 
+        public string GetResultString()
+        {
+            string result = "";
+            foreach (string stream in output)
+            {
+                result += stream;
+            }
 
+            return result;
+        }
+
+        public void ReadBytesFromFile(string fileName)
+        {
+            byte[] fileBytes = File.ReadAllBytes(fileName);
+
+            foreach (byte b in fileBytes)
+            {
+                Bytes.Add(Convert.ToString(b, 2).PadLeft(8, '0'));
+            }
+        }
+
+        private byte[] GetOutputBytes()
+        {
+            List<byte> byteList = new List<byte>();
+
+            foreach (string stream in output)
+            {
+                byteList.Add(Convert.ToByte(stream, 2));
+            }
+            return byteList.ToArray();
+        }
+
+        public void WriteBytesToFile(string filename)
+        {
+            File.WriteAllBytes(filename, GetOutputBytes());
+        }
     }
 }

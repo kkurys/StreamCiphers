@@ -9,8 +9,9 @@ using StreamCiphers_Logic;
 namespace StreamCiphers_Tests
 {
     [TestClass]
-    class AutokeyCiphertext_Tests
+    public class AutokeyCiphertext_Tests
     {
+        /*
         [TestMethod]
         public void AutokeyCiphertext_Logic_Initialization()
         {
@@ -26,6 +27,7 @@ namespace StreamCiphers_Tests
             //Assert.AreEqual("1101", lfsr.Polynomial);
 
         }
+        */
 
         /*
         [TestMethod]
@@ -44,8 +46,13 @@ namespace StreamCiphers_Tests
         {
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
-            autokey.Init("1011", "1001", "1100");
-            string result = autokey.GetEcnryptedString();
+            //autokey.Init("1011", "1001", "1100");
+            autokey.Init("1011", "1001");
+            List<string> streams = new List<string>();
+            streams.Add("1100");
+            autokey.Bytes = streams;
+            autokey.Encrypt();
+            string result = autokey.GetResultString();
 
             Assert.AreEqual("1110", result);
         }
@@ -55,10 +62,62 @@ namespace StreamCiphers_Tests
         {
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
-            autokey.Init("0010", "1011", "1111");
-            string result = autokey.GetEcnryptedString();
+            //autokey.Init("0010", "1011", "1111");
+            autokey.Init("0010", "1011");
+            List<string> streams = new List<string>();
+            streams.Add("1111");
+            autokey.Bytes = streams;
+            autokey.Encrypt();
+            string result = autokey.GetResultString();
 
             Assert.AreEqual("0010", result);
+        }
+
+        [TestMethod]
+        public void AutokeyCiphertext_Logic_Engine_Works_3()
+        {
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
+
+            //autokey.Init("1011", "1001", "11001101");
+            autokey.Init("1011", "1001");
+            List<string> streams = new List<string>();
+            streams.Add("11001101");
+            autokey.Bytes = streams;
+            autokey.Encrypt();
+            string result = autokey.GetResultString();
+
+            Assert.AreEqual("11100010", result);
+        }
+
+        [TestMethod]
+        public void AutokeyCiphertext_Logic_Engine_Works_4()
+        {
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
+
+            //autokey.Init("1110", "0101", "10011101");
+            autokey.Init("1110", "0101");
+            List<string> streams = new List<string>();
+            streams.Add("10011101");
+            autokey.Bytes = streams;
+            autokey.Encrypt();
+            string result = autokey.GetResultString();
+
+            Assert.AreEqual("00100110", result);
+        }
+
+        [TestMethod]
+        public void AutokeyCiphertext_Logic_Engine_Works_File()
+        {
+            AutokeyCiphertext autokey = new AutokeyCiphertext();
+
+            //autokey.Init("1110", "0101", "10011101");
+            autokey.Init("11101010", "10100011");
+            autokey.ReadBytesFromFile("test3.bin");
+            autokey.Encrypt();
+            autokey.WriteBytesToFile("output3.bin");
+            string result = autokey.GetResultString();
+
+            Assert.AreEqual("00100110", result);
         }
     }
 }
