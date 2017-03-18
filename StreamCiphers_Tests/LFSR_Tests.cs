@@ -17,16 +17,6 @@ namespace StreamCiphers_Tests
 
         }
         [TestMethod]
-        public void Math_Operations_Work()
-        {
-            int seed = 11;
-            Assert.AreEqual(11, seed);
-            // seed = 1011, polynomial = 1101
-            int bit = ((seed >> 0) ^ (seed >> 1) ^ (seed >> 3)) & 1;
-            Assert.AreEqual(1, bit);
-
-        }
-        [TestMethod]
         public void LFSR_Shift_Works()
         {
             LFSR lfsr = new LFSR();
