@@ -12,20 +12,45 @@ namespace StreamCiphers_Logic
         List<int> seed;
         List<int> f;
         List<int> x;
-        
+        List<int> y;
+
         byte[] fileBytes;
 
         public AutokeyCiphertext(string fileName)
         {
+            // czytanie z pliku !!
             fileBytes = File.ReadAllBytes(fileName);
             seed = new List<int>();
             f = new List<int>();
             x = new List<int>();
+            y = new List<int>();
+        }
+
+        public AutokeyCiphertext(string argSeed, string argFunction, string argStream)
+        {
+            seed = new List<int>();
+            f = new List<int>();
+            x = new List<int>();
+
+            for (int i = 0; i < argSeed.Count(); i++)
+            {
+                seed.Add(int.Parse(argSeed[i].ToString()));
+                y.Add(0);
+            }
+            
+            for (int i = 0; i < 4; i++)
+            {
+                f.Add(int.Parse(argFunction[i].ToString()));
+            }
+            
+            for (int i = 0; i < 4; i++)
+            {
+                x.Add(int.Parse(argStream[i].ToString()));
+            }
         }
 
         public List<int> Encrypt()
         {
-            List<int> y = new List<int>();
 
             for (int i = 0; i < seed.Count(); i++)
             {
@@ -47,6 +72,18 @@ namespace StreamCiphers_Logic
             }
 
             return y;
+        }
+
+        public string GetEcnryptedString()
+        {
+            string result = "";
+
+            for (int i = 0; i < y.Count(); i++)
+            {
+                result += y[i];
+            }
+
+            return result;
         }
 
 
