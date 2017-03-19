@@ -24,5 +24,17 @@ namespace StreamCiphers
         {
             InitializeComponent();
         }
+
+        private void generator_checked(object sender, RoutedEventArgs e)
+        {
+            outputTB.IsEnabled = true;
+            fileTB.IsEnabled = false;
+        }
+
+        private void encryption_checked(object sender, RoutedEventArgs e)
+        {
+            outputTB.IsEnabled = false;
+            fileTB.IsEnabled = true;
+        }
     }
 }
