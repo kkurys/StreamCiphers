@@ -14,18 +14,26 @@ namespace StreamCiphers_Logic
         }
         public int XORBits(int _base)
         {
-            int bit = _base;
+            string _baseString = Convert.ToString(_base, 2);
+            _baseString = _baseString.PadLeft(Polynomial.Length, '0');
+            int bit = -1;
             for (int j = 1; j < Polynomial.Length; j++)
             {
                 if (Polynomial[j] == '1')
                 {
-                    bit = bit ^ (_base >> j);
+                    if (bit == -1)
+                    {
+                        bit = Convert.ToInt32(_baseString[j]);
+                    }
+                    else
+                    {
+                        int _currentBitValue = Convert.ToInt32(_baseString[j ]);
+                        bit = (bit ^ _currentBitValue);
+                    }
+
                 }
             }
-            string bitString = Convert.ToString(bit, 2);
-           // bitString = bitString.PadLeft(Seed.Length, '0');
-            if (bitString.LastIndexOf('0') != -1) return 0;
-            return 1;
+            return (bit & 1);
         }
         public int ReplaceFirstBit(int _base, int bit)
         {
@@ -55,8 +63,6 @@ namespace StreamCiphers_Logic
                 cipheredInt = ReplaceFirstBit(cipheredInt, bit);
 
                 ciphered = Convert.ToString(cipheredInt, 2).PadLeft(Seed.Length, '0');
-                if ( i == 3)
-                    return ciphered;
                 result += ciphered[0];
             }
 

@@ -26,16 +26,25 @@ namespace StreamCiphers_Tests
             Assert.AreEqual(2, lfsr.Shift(4));
         }
         [TestMethod]
-        public void LFSR_Logic_XOR_Works()
+        public void LFSR_Logic_XOR_Returns_0()
         {
             LFSR lfsr = new LFSR();
 
             lfsr.Init("1011", "11001");
 
             Assert.AreEqual(0, lfsr.XORBits(11));
+            Assert.AreEqual(0, lfsr.XORBits(13));
+            Assert.AreEqual(0, lfsr.XORBits(29));
+        }
+        [TestMethod]
+        public void LFSR_Logic_XOR_Returns_1()
+        {
+            LFSR lfsr = new LFSR();
+
+            lfsr.Init("1011", "11001");
+
             Assert.AreEqual(1, lfsr.XORBits(5));
             Assert.AreEqual(1, lfsr.XORBits(10));
-            Assert.AreEqual(0, lfsr.XORBits(13));
         }
         [TestMethod]
         public void LSFR_Logic_Bit_Replacing_Works()
@@ -59,6 +68,11 @@ namespace StreamCiphers_Tests
             string result = lfsr.GetOutput();
 
             Assert.AreEqual("0110", result);
+
+            lfsr.Init("11101", "110111");
+            result = lfsr.GetOutput();
+            Assert.AreEqual("11010", result);
+
         }
     }
 }
