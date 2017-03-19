@@ -27,14 +27,32 @@ namespace StreamCiphers
 
         private void generator_checked(object sender, RoutedEventArgs e)
         {
-            outputTB.IsEnabled = true;
             fileTB.IsEnabled = false;
+            modeGB.IsEnabled = false;
         }
 
         private void encryption_checked(object sender, RoutedEventArgs e)
         {
-            outputTB.IsEnabled = false;
             fileTB.IsEnabled = true;
+            
+            RadioButton checkedRB = (RadioButton)sender;
+            if (checkedRB.Name == "ex3")
+            {
+                modeGB.IsEnabled = true;
+            }
+            else
+            {
+                modeGB.IsEnabled = false;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ex1.IsChecked = true;
+            encrypt.IsChecked = true;
+            outputTB.IsEnabled = false;
+            fileTB.IsEnabled = false;
+            modeGB.IsEnabled = false;
         }
     }
 }

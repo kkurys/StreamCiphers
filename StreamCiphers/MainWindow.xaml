@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StreamCiphers"
         mc:Ignorable="d"
-        Title="MainWindow" Width="525" SizeToContent="Height">
+        Title="MainWindow" Width="525" SizeToContent="Height" Loaded="Window_Loaded">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,10 +28,20 @@
         <TextBox Margin="3" Padding="3" Grid.Column="1" Grid.Row="3" Name="fileTB"></TextBox>
 
         <StackPanel Margin="5" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <RadioButton Margin="5" Padding="3" Name="ex1" GroupName="exercise" IsChecked="True" Checked="generator_checked">Ex. 1</RadioButton>
-            <RadioButton Margin="5" Padding="3" Name="ex2" GroupName="exercise" Checked="encryption_checked">Ex. 2</RadioButton>
-            <RadioButton Margin="5" Padding="3" Name="ex3" GroupName="exercise" Checked="encryption_checked">Ex. 3</RadioButton>
-            <Button Margin="50 3" Padding="25 3" Name="runButton" Content="Run"></Button>
+            <GroupBox Header="Algorithm">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Margin="5" Padding="3" Name="ex1" GroupName="exercise" Checked="generator_checked">Ex. 1</RadioButton>
+                    <RadioButton Margin="5" Padding="3" Name="ex2" GroupName="exercise" Checked="encryption_checked">Ex. 2</RadioButton>
+                    <RadioButton Margin="5" Padding="3" Name="ex3" GroupName="exercise" Checked="encryption_checked">Ex. 3</RadioButton>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Mode" Name="modeGB">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Margin="5" Padding="3" Name="encrypt" GroupName="mode">Eencrypt</RadioButton>
+                    <RadioButton Margin="5" Padding="3" Name="decrypt" GroupName="mode">Decrypt</RadioButton>
+                </StackPanel>
+            </GroupBox>
+            <Button Margin="5 5" Padding="25 3" Name="runButton" Content="Run"></Button>
         </StackPanel>
     </Grid>
 </Window>
