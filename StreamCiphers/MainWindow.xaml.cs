@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StreamCiphers_Logic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StreamCiphers
 {
@@ -20,6 +9,11 @@ namespace StreamCiphers
     /// </summary>
     public partial class MainWindow : Window
     {
+        LFSR lfsr = new LFSR();
+        AutokeyCiphertext autokey = new AutokeyCiphertext();
+
+        ICipher _cipher;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +23,8 @@ namespace StreamCiphers
         {
             fileTB.IsEnabled = false;
             modeGB.IsEnabled = false;
+
+            _cipher = lfsr;
         }
 
         private void encryption_checked(object sender, RoutedEventArgs e)
@@ -36,6 +32,15 @@ namespace StreamCiphers
             fileTB.IsEnabled = true;
             
             RadioButton checkedRB = (RadioButton)sender;
+            var _radiobutton = sender as RadioButton;
+            if (_radiobutton.Name == "ex2")
+            {
+                // _cipher = autokey;
+            }
+            else
+            {
+                // _cipher = ...;
+            }
             if (checkedRB.Name == "ex3")
             {
                 modeGB.IsEnabled = true;
@@ -53,6 +58,19 @@ namespace StreamCiphers
             outputTB.IsEnabled = false;
             fileTB.IsEnabled = false;
             modeGB.IsEnabled = false;
+            fileTB.IsEnabled = true;
+
+        }
+
+        private void runButton_Click(object sender, RoutedEventArgs e)
+        {
+            var _seed = seedTB.Text;
+            var _polynomial = polynomialTB.Text;
+
+            _cipher.Init(_seed, _polynomial);
+
+            var result = _cipher.GetOutput();
+            outputTB.Text = result;
         }
     }
 }

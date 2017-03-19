@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICipher.cs" />
+    <Compile Include="LFSR.cs" />
     <Compile Include="AutokeyCiphertext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
