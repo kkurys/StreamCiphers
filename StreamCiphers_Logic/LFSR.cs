@@ -2,7 +2,7 @@
 
 namespace StreamCiphers_Logic
 {
-    public class LFSR
+    public class LFSR : ICipher
     {
         public string Polynomial { get; set; }
         public string Seed { get; set; }
@@ -27,7 +27,7 @@ namespace StreamCiphers_Logic
                     }
                     else
                     {
-                        int _currentBitValue = Convert.ToInt32(_baseString[j ]);
+                        int _currentBitValue = Convert.ToInt32(_baseString[j]);
                         bit = (bit ^ _currentBitValue);
                     }
 
