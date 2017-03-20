@@ -47,19 +47,20 @@ namespace StreamCiphers_Logic
 
         public void Encrypt()
         {
+            List<char> seed = new List<char>();
+            for (int i = 0; i < StringSeed.Count(); i++)
+            {
+                //seed.Add(int.Parse(StringSeed[i].ToString()));
+                seed.Add(StringSeed[i]);
+            }
+
             foreach (string stream in Bytes)
             {
                 //List<int> x = new List<int>();
                 //List<int> y = new List<int>();
                 //List<int> seed = new List<int>();
-                List<char> seed = new List<char>();
-                string outByte = "";
 
-                for (int i = 0; i < StringSeed.Count(); i++)
-                {
-                    //seed.Add(int.Parse(StringSeed[i].ToString()));
-                    seed.Add(StringSeed[i]);
-                }
+                string outByte = "";
 
                 /*
                 for (int i = 0; i < stream.Count(); i++)
@@ -100,16 +101,16 @@ namespace StreamCiphers_Logic
 
         public void Decrypt()
         {
+            List<int> seed = new List<int>();
+            for (int i = 0; i < StringSeed.Count(); i++)
+            {
+                seed.Add(int.Parse(StringSeed[i].ToString()));
+            }
+
             foreach (string stream in Bytes)
             {
                 List<int> x = new List<int>();
                 List<int> y = new List<int>();
-                List<int> seed = new List<int>();
-
-                for (int i = 0; i < StringSeed.Count(); i++)
-                {
-                    seed.Add(int.Parse(StringSeed[i].ToString()));
-                }
 
                 for (int i = 0; i < stream.Count(); i++)
                 {
