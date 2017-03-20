@@ -25,9 +25,16 @@
         <TextBox Margin="3" Padding="3" Grid.Column="1" Name="seedTB"></TextBox>
         <TextBox Margin="3" Padding="3" Grid.Column="1" Grid.Row="1" Name="polynomialTB"></TextBox>
         <TextBox Margin="3" Padding="3" Grid.Column="1" Grid.Row="2" Name="outputTB"></TextBox>
-        <TextBox Margin="3" Padding="3" Grid.Column="1" Grid.Row="3" Name="fileTB"></TextBox>
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Margin="3" Padding="3" Name="fileTB"></TextBox>
+            <Button Margin="3" Padding="10 3" Name="openFileBTN" Grid.Column="1" Click="openFileBTN_Click">Open</Button>
+        </Grid>
 
-        <StackPanel Margin="5" Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Margin="5" Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <GroupBox Header="Algorithm">
                 <StackPanel Orientation="Horizontal">
                     <RadioButton Margin="5" Padding="3" Name="ex1" GroupName="exercise" Checked="generator_checked">Ex. 1</RadioButton>
@@ -41,7 +48,7 @@
                     <RadioButton Margin="5" Padding="3" Name="decrypt" GroupName="mode">Decrypt</RadioButton>
                 </StackPanel>
             </GroupBox>
-            <Button Margin="5 5" Padding="25 3" Name="runButton" Content="Run"></Button>
+            <Button Margin="5 15" Padding="15 3" Name="runButton" Content="Run" Click="runButton_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

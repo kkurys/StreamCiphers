@@ -65,12 +65,12 @@ namespace StreamCiphers_Tests
 
             lfsr.Init("1011", "11001");
 
-            string result = lfsr.GetOutput();
+            string result = lfsr.GetOutput("", -1);
 
             Assert.AreEqual("0110", result);
 
             lfsr.Init("11101", "110111");
-            result = lfsr.GetOutput();
+            result = lfsr.GetOutput("", -1);
             Assert.AreEqual("11010", result);
 
         }

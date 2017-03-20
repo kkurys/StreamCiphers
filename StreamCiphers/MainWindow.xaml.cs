@@ -1,4 +1,6 @@
-﻿using StreamCiphers_Logic;
+﻿using Microsoft.Win32;
+using StreamCiphers_Logic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,6 +24,7 @@ namespace StreamCiphers
         private void generator_checked(object sender, RoutedEventArgs e)
         {
             fileTB.IsEnabled = false;
+            openFileBTN.IsEnabled = false;
             modeGB.IsEnabled = false;
 
             _cipher = lfsr;
@@ -30,24 +33,17 @@ namespace StreamCiphers
         private void encryption_checked(object sender, RoutedEventArgs e)
         {
             fileTB.IsEnabled = true;
-            
-            RadioButton checkedRB = (RadioButton)sender;
+            openFileBTN.IsEnabled = true;
+
             var _radiobutton = sender as RadioButton;
             if (_radiobutton.Name == "ex2")
             {
-                // _cipher = autokey;
+                modeGB.IsEnabled = false;
             }
             else
-            {
-                // _cipher = ...;
-            }
-            if (checkedRB.Name == "ex3")
             {
                 modeGB.IsEnabled = true;
-            }
-            else
-            {
-                modeGB.IsEnabled = false;
+                _cipher = autokey;
             }
         }
 
@@ -58,7 +54,7 @@ namespace StreamCiphers
             outputTB.IsEnabled = false;
             fileTB.IsEnabled = false;
             modeGB.IsEnabled = false;
-            fileTB.IsEnabled = true;
+            openFileBTN.IsEnabled = false;
 
         }
 
@@ -66,11 +62,23 @@ namespace StreamCiphers
         {
             var _seed = seedTB.Text;
             var _polynomial = polynomialTB.Text;
+            var _fileName = fileTB.Text;
+            int _mode = 0;
+            if (encrypt.IsChecked == true) _mode = 0;
+            if (decrypt.IsChecked == true) _mode = 1;
 
             _cipher.Init(_seed, _polynomial);
-
-            var result = _cipher.GetOutput();
+            var result = _cipher.GetOutput(_fileName, _mode);
             outputTB.Text = result;
+        }
+
+        private void openFileBTN_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if (fileDialog.ShowDialog() == true)
+            {
+                fileTB.Text = fileDialog.FileName;
+            }
         }
     }
 }

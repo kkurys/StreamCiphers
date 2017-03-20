@@ -48,7 +48,7 @@ namespace StreamCiphers_Logic
         {
             return (_base >> 1);
         }
-        public string GetOutput()
+        public string GetOutput(string _fileName, int _mode)
         {
             string result = "";
             string ciphered = Seed;
