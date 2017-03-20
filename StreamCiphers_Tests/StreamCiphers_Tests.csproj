@@ -53,6 +53,7 @@
     <Compile Include="AutokeyCiphertext_Tests.cs" />
     <Compile Include="LFSR_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynchronousStream_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StreamCiphers_Logic\StreamCiphers_Logic.csproj">
