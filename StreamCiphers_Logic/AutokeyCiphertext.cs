@@ -10,6 +10,7 @@ namespace StreamCiphers_Logic
     public class AutokeyCiphertext : ICipher
     {
         public string StringSeed { get; set; }
+        public string Polynomial { get; set; }
         public List<int> F { get; set; }
         public List<string> Bytes { get; set; }
         List<string> output;
@@ -36,6 +37,8 @@ namespace StreamCiphers_Logic
             Bytes = new List<string>();
             output = new List<string>();
             StringSeed = _seed;
+            Polynomial = _polynomial;
+
             for (int i = 0; i < _polynomial.Count(); i++)
             {
                 F.Add(int.Parse(_polynomial[i].ToString()));
@@ -46,40 +49,52 @@ namespace StreamCiphers_Logic
         {
             foreach (string stream in Bytes)
             {
-                List<int> x = new List<int>();
-                List<int> y = new List<int>();
-                List<int> seed = new List<int>();
+                //List<int> x = new List<int>();
+                //List<int> y = new List<int>();
+                //List<int> seed = new List<int>();
+                List<char> seed = new List<char>();
+                string outByte = "";
 
                 for (int i = 0; i < StringSeed.Count(); i++)
                 {
-                    seed.Add(int.Parse(StringSeed[i].ToString()));
+                    //seed.Add(int.Parse(StringSeed[i].ToString()));
+                    seed.Add(StringSeed[i]);
                 }
 
+                /*
                 for (int i = 0; i < stream.Count(); i++)
                 {
                     x.Add(int.Parse(stream[i].ToString()));
-                    y.Add(0);
+                    //y.Add(0);
                 }
+                */
 
-                for (int i = 0; i < x.Count(); i++)
+                for (int i = 0; i < stream.Count(); i++)
                 {
-                    for (int j = 0; j < F.Count(); j++)
+                    int xorCounter = 0;
+                    
+                    for (int j = 0; j < Polynomial.Count(); j++)
                     {
-                        if (F[j] == 1)
+                        if (Polynomial[j] == '1' && seed[j] == '1')
                         {
-                            y[i] += seed[j];
+                            xorCounter++;
                         }
                     }
 
-                    y[i] = (x[i] + y[i]) % 2;
+                    if (stream[i] == '1')
+                    {
+                        xorCounter++;
+                    }
+                    //y[i] = (x[i] + y[i]) % 2;
+                    outByte += xorCounter % 2;
 
                     for (int j = seed.Count() - 1; j > 0; j--)
                     {
                         seed[j] = seed[j - 1];
                     }
-                    seed[0] = y[i];
+                    seed[0] = outByte[i];
                 }
-                output.Add(ByteToString(y));
+                output.Add(outByte);
             }
         }
 
