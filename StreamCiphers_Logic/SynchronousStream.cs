@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace StreamCiphers_Logic
 {
     public class SynchronousStream : ICipher
     {
         private LFSR _lfsr;
-        private byte[] _fileBytes;
         private List<string> _output;
         public List<string> Bytes { get; set; }
 
@@ -20,10 +20,11 @@ namespace StreamCiphers_Logic
         public string Polynomial { get; set; }
         public string Seed { get; set; }
 
-        public string GetOutput()
+        public string GetOutput(string _fileName, int _mode)
         {
-            string _lfsrResult = _lfsr.GetOutput();
+            string _lfsrResult = _lfsr.GetOutput(null, 0);
             string _result = "";
+            ReadBytesFromFile(_fileName);
             foreach (string input in Bytes)
             {
                 _result = "";
@@ -31,9 +32,10 @@ namespace StreamCiphers_Logic
                 {
                     _result += (Convert.ToInt32(input[i]) ^ Convert.ToInt32(_lfsrResult[i % _lfsrResult.Length]));
                 }
+                _output.Add(_result);
             }
 
-            WriteBytesToFile("out.bin");
+            WriteBytesToFile(GetOutputFileName(_fileName));
             return _result;
         }
         public void ReadBytesFromFile(string fileName)
@@ -50,7 +52,10 @@ namespace StreamCiphers_Logic
         {
             Seed = _seed;
             Polynomial = _polynomial;
+            Bytes.Clear();
             _lfsr.Init(Seed, Polynomial);
+            _output.Clear();
+
         }
         private byte[] GetOutputBytes()
         {
@@ -61,6 +66,13 @@ namespace StreamCiphers_Logic
                 byteList.Add(Convert.ToByte(stream, 2));
             }
             return byteList.ToArray();
+        }
+        public string GetOutputFileName(string inputFileName)
+        {
+            string[] parts = inputFileName.Split('.');
+            parts[parts.Count() - 2] += "_out";
+
+            return String.Join(".", parts);
         }
 
         public void WriteBytesToFile(string filename)
