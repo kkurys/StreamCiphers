@@ -165,9 +165,17 @@ namespace StreamCiphers_Logic
                 Decrypt();
             }
             string result = "";
+
+            int counter = 0;
             foreach (string stream in output)
             {
                 result += stream;
+                counter++;
+                if (counter > 5)
+                {
+                    result += "...";
+                    break;
+                }
             }
             if (_fileName != "")
             {
