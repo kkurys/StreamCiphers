@@ -68,5 +68,10 @@ namespace StreamCiphers_Logic
 
             return result;
         }
+
+        public void ReadFile(string _fileName)
+        {
+
+        }
     }
 }

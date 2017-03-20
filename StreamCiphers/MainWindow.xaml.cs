@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using StreamCiphers_Logic;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +12,7 @@ namespace StreamCiphers
     {
         LFSR lfsr = new LFSR();
         AutokeyCiphertext autokey = new AutokeyCiphertext();
-
+        SynchronousStream synchronous = new SynchronousStream();
         ICipher _cipher;
 
         public MainWindow()
@@ -39,6 +38,7 @@ namespace StreamCiphers
             if (_radiobutton.Name == "ex2")
             {
                 modeGB.IsEnabled = false;
+                _cipher = synchronous;
             }
             else
             {
