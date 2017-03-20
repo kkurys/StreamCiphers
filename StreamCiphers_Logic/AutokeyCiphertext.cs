@@ -74,9 +74,9 @@ namespace StreamCiphers_Logic
                 {
                     int xorCounter = 0;
                     
-                    for (int j = 0; j < Polynomial.Count(); j++)
+                    for (int j = 1; j < Polynomial.Count(); j++)
                     {
-                        if (Polynomial[j] == '1' && seed[j] == '1')
+                        if (Polynomial[j] == '1' && seed[j - 1] == '1')
                         {
                             xorCounter++;
                         }
@@ -120,11 +120,11 @@ namespace StreamCiphers_Logic
                 
                 for (int i = 0; i < x.Count(); i++)
                 {
-                    for (int j = 0; j < F.Count(); j++)
+                    for (int j = 1; j < F.Count(); j++)
                     {
                         if (F[j] == 1)
                         {
-                            y[i] += seed[j];
+                            y[i] += seed[j - 1];
                         }
                     }
 

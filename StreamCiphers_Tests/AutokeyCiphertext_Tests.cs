@@ -17,7 +17,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1011", "1001", "1100");
-            autokey.Init("1011", "1001");
+            autokey.Init("1011", "11001");
             List<string> streams = new List<string>();
             streams.Add("1100");
             autokey.Bytes = streams;
@@ -33,7 +33,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1011", "1001", "11001101");
-            autokey.Init("1011", "1001");
+            autokey.Init("1011", "11001");
             List<string> streams = new List<string>();
             streams.Add("11001101");
             autokey.Bytes = streams;
@@ -49,7 +49,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1110", "0101", "10011101");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("10011101");
             autokey.Bytes = streams;
@@ -65,7 +65,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("0010", "1011", "1111");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("01110010");
             autokey.Bytes = streams;
@@ -81,7 +81,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("0010", "1011", "1111");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("10011101");
             streams.Add("01110010");
@@ -97,7 +97,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1011", "1001", "1100");
-            autokey.Init("1011", "1001");
+            autokey.Init("1011", "11001");
             List<string> streams = new List<string>();
             streams.Add("1110");
             autokey.Bytes = streams;
@@ -112,7 +112,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1011", "1001", "11001101");
-            autokey.Init("1011", "1001");
+            autokey.Init("1011", "11001");
             List<string> streams = new List<string>();
             streams.Add("11100010");
             autokey.Bytes = streams;
@@ -128,7 +128,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("1110", "0101", "10011101");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("00000111");
             autokey.Bytes = streams;
@@ -144,7 +144,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("0010", "1011", "1111");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("10101010");
             autokey.Bytes = streams;
@@ -160,7 +160,7 @@ namespace StreamCiphers_Tests
             AutokeyCiphertext autokey = new AutokeyCiphertext();
 
             //autokey.Init("0010", "1011", "1111");
-            autokey.Init("11101010", "10100011");
+            autokey.Init("11101010", "110100011");
             List<string> streams = new List<string>();
             streams.Add("00000111");
             streams.Add("10101010");
