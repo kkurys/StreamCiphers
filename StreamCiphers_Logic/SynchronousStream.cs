@@ -31,12 +31,17 @@ namespace StreamCiphers_Logic
             }
             string _result = "";
             ReadBytesFromFile(_fileName);
+            int pos = 0;
             foreach (string input in Bytes)
             {
                 _result = "";
                 for (int i = 0; i < 8; i++)
                 {
-                    _result += (Convert.ToInt32(input[i]) ^ Convert.ToInt32(_lfsrResult[i % _lfsrResult.Length]));
+                    _result += (Convert.ToInt32(input[i]) ^ Convert.ToInt32(_lfsrResult[pos++]));
+                    if (pos == _lfsrResult.Length)
+                    {
+                        pos = 0;
+                    }
                 }
                 _output.Add(_result);
             }

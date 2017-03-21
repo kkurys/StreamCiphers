@@ -17,7 +17,7 @@ namespace StreamCiphers_Logic
             string _baseString = Convert.ToString(_base, 2);
             _baseString = _baseString.PadLeft(Polynomial.Length, '0');
             int bit = -1;
-            for (int j = 1; j < Polynomial.Length; j++)
+            for (int j = 0; j < Polynomial.Length; j++)
             {
                 if (Polynomial[j] == '1')
                 {
