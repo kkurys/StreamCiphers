@@ -63,7 +63,7 @@ namespace StreamCiphers_Logic
                 cipheredInt = ReplaceFirstBit(cipheredInt, bit);
 
                 ciphered = Convert.ToString(cipheredInt, 2).PadLeft(Seed.Length, '0');
-                result += ciphered[0];
+                result += ciphered + "\n";
             }
 
             return result;

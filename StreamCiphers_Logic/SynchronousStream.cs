@@ -22,7 +22,13 @@ namespace StreamCiphers_Logic
 
         public string GetOutput(string _fileName, int _mode)
         {
-            string _lfsrResult = _lfsr.GetOutput(null, 0);
+            string _lfsrResults = _lfsr.GetOutput(null, 0);
+            string[] _lfsrResultTokens = _lfsrResults.Split('\n');
+            string _lfsrResult = "";
+            for (int i = 0; i < _lfsrResultTokens.Length; i++)
+            {
+                _lfsrResult += _lfsrResultTokens[0];                
+            }
             string _result = "";
             ReadBytesFromFile(_fileName);
             foreach (string input in Bytes)
